@@ -11,6 +11,12 @@ export default function SignUpPage() {
   const { signUpWithEmail, isLoading } = useAuthStore();
 
   async function handleSignUp() {
+    // Make sure the user enters a name
+    if (!name.trim()) {
+      Alert.alert("Sign-up Error", "Please enter your name.");
+      return;
+    }
+
     try {
       await signUpWithEmail(name, email, password);
       if (!isLoading) {
@@ -20,6 +26,7 @@ export default function SignUpPage() {
       Alert.alert("Sign-up Error", error.message);
     }
   }
+
   return (
     <View className="flex-1 bg-gray-900 justify-between px-5 pb-10 pt-20">
       <View className="max-w-md w-full mx-auto space-y-4">
